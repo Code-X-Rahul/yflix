@@ -1,0 +1,76 @@
+.card{
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
+
+.image--container{
+    position: relative;
+    max-width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 30px;
+}
+.image--container > a >  img:hover{
+    opacity: 0.3;
+}
+
+.image--container > a > img{
+    transition: all 200ms ease-in-out;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 1/1.5;
+    object-fit: cover;
+}
+a{
+    text-decoration: none;
+}
+.card > a > p{
+    height: 8vh;
+    padding: 0 0.5rem;
+    text-align: center;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    color: var(--primary-font-color);
+}
+.play-button{
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+ion-icon{
+    transition: all 200ms ease-in-out;
+}
+.card:hover ion-icon,
+.link-div:hover ion-icon{
+    font-size: 5rem;
+}
+.details,
+.type,
+.link{
+    position: absolute;
+    padding: 5px;
+    background-color: var(--primary-color);
+    font-size: 0.7rem;
+    text-align: center;
+}
+.details{
+    bottom: 0.4rem;
+    display: flex;
+    z-index: 200;
+    border-top-right-radius: 10px;
+}
+.type{
+    right: 0;
+    border-bottom-left-radius: 10px;
+}
+.link{
+    inset: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.link-div{
+    width: 100%;
+    height: 100%;
+}
