@@ -12,11 +12,9 @@ import Video from './pages/Video';
 function App() {
 
   const [mountFeed, setMountFeed] = useState("Now")
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState()
   const [videoList, setVideoList] = useState(null)
   const [trendList, setTrendList] = useState(null)
-  const [videoId, setVideoId] = useState(null)
-  const [videoInfo, setVideoInfo] = useState(null)
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
 
@@ -34,21 +32,23 @@ function App() {
     }
   };
 
-
-
-  async function searchVideo(e) {
-    e.preventDefault();
-    setSpinner(true)
-
-    const response = await fetch(`${apiUrl}/search?query=${search}`, options);
-    const json = await response.json();
-    setSpinner(false)
-    console.log(json)
-    setVideoList(json);
-
-    navigate(`/search/${search}`)
-
+  useEffect(()=>{
+    if(search !== undefined && search !== ""){
+    async function searchVideo() {
+      setSpinner(true)
+      const response = await fetch(`${apiUrl}/search?query=${search}`, options);
+      const json = await response.json();
+      setSpinner(false)
+      setVideoList(json);
+      navigate(`/search/${search}`)
+    }
+    searchVideo();
+  }else{
+    return
   }
+  },[search])
+
+ 
   useEffect(() => {
     setSpinner(true)
 
@@ -62,51 +62,27 @@ function App() {
     fetchData()
   }, [mountFeed])
 
-  useEffect(() => {
-    // const watchVideo = (param) => {
-    setSpinner(true)
-    async function fetchVideoInfo() {
-      const response = await fetch(`${apiUrl}/video/info?id=${videoId}`, options)
-      const json = await response.json();
-      setSpinner(false)
-      setVideoInfo(json);
-      navigate(`/watch/${videoId}`)
-      console.log(json)
-    }
-    fetchVideoInfo();
-    // }
-  }, [videoId])
 
 
   return (
 
     <div>
-      {!spinner && <Header searchVideo={searchVideo} search={search} setSearch={setSearch} />}
+      {!spinner && <Header search={search} setSearch={setSearch} />}
       {/* {!spinner && <Navbar />} */}
       <Routes>
         <Route path="/" element={<Feed
+          setSpinner={setSpinner}
           setMountFeed={setMountFeed}
           mountFeed={mountFeed}
-          // watchVideo={watchVideo}
-          setVideoId={setVideoId}
-          videoId={videoId}
           trendList={trendList}
-          searchVideo={searchVideo}
-          setSearch={search}
-          search={search}
           spinner={spinner}
         />} />
         <Route path="/search/:searchTerm" element={<Homepage
-          // watchVideo={watchVideo}
-          search={search}
-          searchVideo={searchVideo}
-          videoId={videoId}
+          setSpinner={setSpinner}
           videoList={videoList}
-          setSearch={setSearch}
-          setVideoId={setVideoId}
           spinner={spinner}
         />} />
-        <Route path="/watch/:videoId" element={<Video videoInfo={videoInfo} videoId={videoId} />} />
+        <Route path="/watch/:videoId" element={<Video spinner={spinner} setSpinner={setSpinner}/>} />
       </Routes>
     </div>
   )

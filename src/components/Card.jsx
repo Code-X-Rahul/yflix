@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
-const Card = ({ dataObject, id, watchVideo, setVideoId }) => {
+const Card = ({ dataObject , setSpinner}) => {
+    const [videoId, setVideoId] = useState()
+    const navigate = useNavigate();
+
 
     let image = "";
     let videoTitle = "";
@@ -24,10 +28,19 @@ const Card = ({ dataObject, id, watchVideo, setVideoId }) => {
     } else {
         return
     }
+    useEffect(() => {
+        if (videoId === undefined) {
+            return
+        } else {
+            setSpinner(true)
+            navigate(`/watch/${videoId}`)
+            setSpinner(false)
+        }
+    }, [videoId])
+
 
     const videoIdHandler = () => {
-        setVideoId()
-        // watchVideo(dataObject?.videoId);
+        setVideoId(dataObject?.videoId)
 
     }
     return (

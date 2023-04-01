@@ -2,7 +2,7 @@ import React from 'react'
 import loading from '../assets/loading.webp'
 import { Card } from '../components'
 
-const Feed = ({ trendList, spinner, setVideoId, watchVideo , setMountFeed }) => {
+const Feed = ({setSpinner, trendList, spinner, setVideoId , setMountFeed }) => {
     const mountList = [
         {
             id: Math.random() * 2000,
@@ -36,7 +36,8 @@ const Feed = ({ trendList, spinner, setVideoId, watchVideo , setMountFeed }) => 
     const cardLoop =
         list?.map(el => {
             return el && <Card
-                // watchVideo={watchVideo}
+        setSpinner={setSpinner}
+
                 id={el?.videoId}
                 setVideoId={setVideoId}
                 spinner={spinner}

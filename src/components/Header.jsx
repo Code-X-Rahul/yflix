@@ -1,18 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState , useRef } from 'react'
 import '../styles/HeaderStyles.css'
 import { hamburger, notificationsIcon, youtubeLogo, searchIcon, voiceSearchIcon, uploadIcon, myChannelIcon, youtubeAppsIcon, } from '../icons';
 
-function Header({ searchVideo, search, setSearch }) {
+function Header({ search, setSearch }) {
     const [toggle, setToggle] = useState(false)
+    const searchInputRef = useRef()
 
     const toggleHandle = () => {
         setToggle(prev => !prev);
     }
     const searchInputHandler = (e) => {
-        if(e.target.value === ""){
+        e.preventDefault();
+        if(searchInputRef.current.value === ""){
             return
         }else{
-            setSearch(e.target.value);
+            setSearch(searchInputRef.current.value);
         }
     }
 
@@ -24,12 +26,11 @@ function Header({ searchVideo, search, setSearch }) {
                     <a><img className="youtube-logo" src={youtubeLogo} alt="" /></a>
                 </div>
                 <form
-                    onSubmit={searchVideo}
+                    onSubmit={searchInputHandler}
                     className="middle-section"
                 >
                     <input
-                        value={search}
-                        onChange={searchInputHandler}
+                        ref= {searchInputRef}
                         className="search-box"
                         type="text"
                         placeholder="Search"
@@ -37,7 +38,6 @@ function Header({ searchVideo, search, setSearch }) {
                     <button type='submit' className="search-button">
                         <img className="search-icon" src={searchIcon} alt="" />
                     </button>
-                    <img className="voice-search-icon" src={voiceSearchIcon} alt="" />
                 </form>
                 <div className="right-section">
                     <button onClick={toggleHandle} className="search-button-mobile_only">
@@ -65,9 +65,9 @@ function Header({ searchVideo, search, setSearch }) {
                         <img src={myChannelIcon} alt="" className="my-channel-icon" />
                     </div>
                 </div>
-                <form onSubmit={searchVideo} className={`hidden ${toggle && "mobile-search-bar-div"}`}>
+                <form className={`hidden ${toggle && "mobile-search-bar-div"}`}>
                     <button onClick={toggleHandle} className="back"><ion-icon name="arrow-back-outline"></ion-icon></button>
-                    <input value={search} onChange={searchInputHandler} type="text" className="search-bar-mobile" placeholder="Search" />
+                    <input type="text" className="search-bar-mobile" placeholder="Search" />
                     <button className="search-button mobile-btn">
                         <img className="search-icon" src={searchIcon} alt="" />
                     </button>
