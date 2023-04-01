@@ -35,8 +35,8 @@ const Video = ({setSpinner ,spinner}) => {
     <>
       {!spinner && <div className='player'>
         <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`}
-          width='640px'
-          height='360px'
+          width='100%'
+          height='100%'
           muted
           controls
         />
