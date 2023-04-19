@@ -8,6 +8,7 @@ import Homepage from './pages/Homepage';
 import { Header, Navbar } from './components';
 import Feed from './pages/Feed';
 import Video from './pages/Video';
+import Channel from './pages/Channel';
 
 function App() {
 
@@ -83,6 +84,7 @@ function App() {
           spinner={spinner}
         />} />
         <Route path="/watch/:videoId" element={<Video spinner={spinner} setSpinner={setSpinner}/>} />
+        <Route path="/channel/:channelId" element={<Channel spinner={spinner} setSpinner={setSpinner}/>} />
       </Routes>
     </div>
   )

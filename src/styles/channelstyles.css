@@ -1,0 +1,74 @@
+.banner {
+  width: 100%;
+}
+.banner > img {
+  width: 100%;
+  object-fit: cover;
+}
+.channel-details {
+  padding-block: 1rem;
+}
+.channel-sub-details,
+.tabs {
+  background-color: aqua;
+  display: flex;
+  justify-content: flex-start;
+  width: 70%;
+}
+.channel-image > img {
+  width: 90%;
+  border-radius: 50%;
+}
+img {
+  display: block;
+}
+.detail-box {
+  margin-block: 1rem;
+}
+.detail-box > h1 {
+  font-size: 2rem;
+}
+.all-counts {
+  justify-content: flex-start;
+}
+.all-counts > p {
+  color: #292828;
+  padding-inline: 0.2rem;
+}
+.ch-des {
+  color: #292828;
+  margin-block: 1rem;
+  display: flex;
+}
+.desc-text {
+  width: 50ch;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin-inline-end: 1rem;
+}
+.tabs{
+  padding-inline: 2rem;
+}
+.tabs > li{
+  cursor: pointer;
+  list-style: none;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  position: relative;
+}
+.tabs > li > a:focus-within{
+/* position: absolute;
+content: '';
+left: 10%;
+bottom: 0;
+width: 80%;
+height: 2px; */
+color: black;
+}
+.videos-listing{
+  width: 70%;
+}

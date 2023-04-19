@@ -1,3 +1,4 @@
+
 .flex{
     display: flex;
     align-items: center;
@@ -8,11 +9,6 @@
     inset: 0;
     background-color: black;
 }
-.player {
-    margin-block: 1rem;
-    max-width: 800px;
-    min-width: 300px;
-  }
 .overlay-cat{
     /* background-color: #ccc; */
     overflow: hidden;

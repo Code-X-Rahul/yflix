@@ -2,7 +2,7 @@ import React from 'react';
 import loading from '../assets/loading.webp'
 import Card from '../components/Card';
 
-const Homepage = ({ setSpinner ,spinner, videoList, setVideoId, watchVideo }) => {
+const Homepage = ({ setSpinner ,spinner, videoList }) => {
   const list = videoList?.data;
   const cardLoop =
     list?.map(el => {
@@ -13,7 +13,6 @@ const Homepage = ({ setSpinner ,spinner, videoList, setVideoId, watchVideo }) =>
         key={Math.random() * 2000}
         dataObject={el}
         videoList={videoList}
-        setVideoId={setVideoId}
       />
     })
 
