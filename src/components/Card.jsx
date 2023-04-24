@@ -13,9 +13,9 @@ const Card = ({ dataObject, setSpinner }) => {
     let channelName = "";
     let cpf = "";
     if (dataObject.type === "video") {
-        if (dataObject?.thumbnail !== undefined) {
-            if (dataObject?.thumbnail[2] !== undefined) {
-                image = dataObject?.thumbnail[2].url;
+        if (dataObject?.thumbnail !== undefined || null) {
+            if (dataObject?.thumbnail[2] !== undefined || null) {
+                image = dataObject?.thumbnail[2]?.url;
             } else if (dataObject?.thumbnail[1] !== undefined) {
                 image = dataObject?.thumbnail[1].url;
             } else {
@@ -72,7 +72,7 @@ const Card = ({ dataObject, setSpinner }) => {
                 </div>}
                 <div className="video-info">
                     <p className="video-title">
-                        <a onClick={videoIdHandler}>{videoTitle}</a>
+                        <a className='wrap-word' onClick={videoIdHandler}>{videoTitle}</a>
                     </p>
                     <p onClick={channelIdHandler} className="channel-name">{channelName}</p>
                     <p className="video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>

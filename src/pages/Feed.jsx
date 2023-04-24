@@ -1,14 +1,11 @@
 import React from 'react'
 import loading from '../assets/loading.webp'
 import { Card } from '../components'
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const Feed = ({ setSpinner, trendList, spinner, setVideoId, setMountFeed }) => {
 
-
-    if (trendList?.data === undefined) {
-        console.log('loading')
-    }
-    const list = trendList?.data;
+const Feed = ({ setSpinner, trendList, spinner }) => {
+    const list = trendList;
     const cardLoop =
         list?.map(el => {
             return el && <Card
@@ -19,6 +16,7 @@ const Feed = ({ setSpinner, trendList, spinner, setVideoId, setMountFeed }) => {
                 dataObject={el}
             />
         })
+
     return (
         <>
             {spinner && <div className="loading flex">

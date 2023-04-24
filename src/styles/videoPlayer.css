@@ -1,28 +1,36 @@
 .player {
   margin-block: 1rem;
-  max-width: 800px;
-  min-width: 300px;
-  width: 90%;
+  width: 95%;
+  /* max-width: 900px; */
+  background-color: aqua;
+  /* width: 853px; */
+  margin-inline: auto;
+  height: 500px;
 }
 .main_video {
+  background-color: rgb(245, 241, 241);
+  background-color: hotpink;
   width: 100%;
-  margin: 1rem;
 }
 .about-video > p {
+  background-color: aqua;
   font-size: 1.3rem;
   margin-inline: 1rem;
 }
 .video-desc {
   position: relative;
-  margin: 1rem;
   padding: 1rem;
-  color: 606060;
+  margin: 1rem;
   background-color: #ccc;
-  border-radius: 2rem;
-  width: 50vw;
+  box-shadow: 5px 5px 15px #ccc;
+  border-radius: 10px;
 }
-.video-desc > p {
+.para {
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 .more-btn {
   font-size: 0.9rem;
@@ -35,32 +43,130 @@
 .showHideStyle {
   position: absolute;
   bottom: 1rem;
-  right: 10rem;
+  right: 2rem;
 }
 .card {
-  margin-block: 0.5rem;
-  width: 18rem;
+  box-sizing: border-box;
+  width: 80%;
+  margin: 0 auto;
+  margin-block: 0.8rem;
   overflow: hidden;
+  border: 2px solid transparent;
+  transition: all 200ms ease-in-out;
+  border-radius: 20px;
+}
+.card:hover {
+  background-color: rgba(248, 242, 242, 0.61);
+  border: 2px solid #f8f6f6;
+  box-shadow: 2px 2px 15px rgba(163, 163, 202, 0.61);
+  transform: scaleX(1.1);
+}
+.card-body > h5 {
+  padding-top: 1rem;
+  padding-inline: 1rem;
+  font-size: 0.8rem;
+}
+.card-body > p {
+  padding-inline: 1rem;
 }
 .card img {
   width: 100%;
   object-fit: contain;
 }
-.card-img-top{
+.card-img-top {
   width: 100%;
   object-fit: cover;
 }
 .grid-only {
-  display: grid;
-  /* margin: 0 1rem; */
-  /* grid-template-columns: repeat(1 , 1fr); */
+  margin-block: 1rem;
 }
-
 .wrapper-absolute {
- display: flex;
- justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .wrapper {
+  width: 90%;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 75% 1fr;
+  gap: 1rem;
+  grid-template-columns: 70% 1fr;
+}
+.comment-wrapper {
+  padding: 1rem;
+}
+.comment-count {
+  font-size: 1.2rem;
+  padding-inline: 0.5rem;
+}
+.comment-grid {
+  margin-block: 1rem;
+}
+.comment-grid span {
+  color: rgb(29, 29, 29);
+  margin-right: 0.6rem;
+}
+.comment-grid p,
+.comment-grid span {
+  margin-left: 0.2rem;
+}
+.ppf {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.ppf > img {
+  margin-top: 0.2rem;
+  width: 40px;
+  border-radius: 50%;
+}
+.loading-spinner {
+  width: 100%;
+  height: 5rem;
+}
+.loading-spinner img {
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 1000px) {
+  .wrapper {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .player {
+    width: 100%;
+    height: 500px;
+  }
+  .showHideStyle {
+    background-color: #ccc;
+    padding: 0.7rem 0 0 1rem;
+    right: 1rem;
+  }
+  .card {
+    width: 90%;
+  }
+  .card-body > h5 {
+    font-size: 0.7rem;
+  }
+  .card-body > p {
+    font-size: 0.7rem;
+  }
+  .comment-wrapper {
+    width: 90%;
+  }
+  .comment-grid span {
+    font-size: 0.7rem;
+  }
+  .comment-grid p {
+    font-size: 0.7rem;
+  }
+  .ppf > img {
+    width: 30px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .player {
+    width: 100%;
+    height: 300px;
+  }
+
 }

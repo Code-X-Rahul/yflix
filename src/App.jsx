@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css'
 import './styles/HeaderStyles.css'
 import './styles/VideoStyles.css'
 import './styles/responsive.css'
-import Homepage from './pages/Homepage';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Feed, Homepage, Video, Channel } from './pages';
 import { Header, Navbar } from './components';
-import Feed from './pages/Feed';
-import Video from './pages/Video';
-import Channel from './pages/Channel';
 
 function App() {
 
-  const [mountFeed, setMountFeed] = useState("Now")
   const [search, setSearch] = useState()
-  const [videoList, setVideoList] = useState(null)
-  const [trendList, setTrendList] = useState(null)
+  const [videoList, setVideoList] = useState([])
+  const [trendList, setTrendList] = useState()
   const [spinner, setSpinner] = useState(false);
+  const [token, setToken] = useState('');
   const navigate = useNavigate();
 
   // API
@@ -33,60 +30,58 @@ function App() {
     }
   };
 
-  useEffect(()=>{
-    if(search !== undefined && search !== ""){
-    async function searchVideo() {
-      setSpinner(true)
-      const response = await fetch(`${apiUrl}/search?query=${search}`, options);
-      const json = await response.json();
-      setSpinner(false)
-      setVideoList(json);
-      navigate(`/search/${search}`)
+  useEffect(() => {
+    if (search !== undefined && search !== "") {
+      async function searchVideo() {
+        setSpinner(true)
+        const response = await fetch(`${apiUrl}/search?query=${search}`, options);
+        const json = await response.json();
+        setSpinner(false)
+        setToken(json?.continuation)
+        setVideoList([...json?.data]);
+        navigate(`/search/${search}`)
+      }
+      searchVideo();
+    } else {
+      return
     }
-    searchVideo();
-  }else{
-    return
-  }
-  },[search])
+  }, [search])
 
- 
+
   useEffect(() => {
     setSpinner(true)
-
     async function fetchData() {
-
-      const response = await fetch(`${apiUrl}/trending?geo=IN&type=${mountFeed}`, options);
+      const response = await fetch(`${apiUrl}/trending?geo=IN`, options);
       const json = await response.json();
+      setTrendList(json?.data);
       setSpinner(false)
-      setTrendList(json);
     }
     fetchData()
-  }, [mountFeed])
-
-
+  }, [])
 
   return (
 
-    <div>
+    <>
       {!spinner && <Header search={search} setSearch={setSearch} />}
       {/* {!spinner && <Navbar />} */}
       <Routes>
         <Route path="/" element={<Feed
           setSpinner={setSpinner}
-          setMountFeed={setMountFeed}
-          mountFeed={mountFeed}
           trendList={trendList}
           spinner={spinner}
         />} />
         <Route path="/search/:searchTerm" element={<Homepage
           setSpinner={setSpinner}
           videoList={videoList}
+          setVideoList={setVideoList}
           spinner={spinner}
+          token={token}
+          setToken={setToken}
         />} />
-        <Route path="/watch/:videoId" element={<Video spinner={spinner} setSpinner={setSpinner}/>} />
-        <Route path="/channel/:channelId" element={<Channel spinner={spinner} setSpinner={setSpinner}/>} />
+        <Route path="/watch/:videoId" element={<Video spinner={spinner} setSpinner={setSpinner} token={token} setToken={setToken} />} />
+        <Route path="/channel/:channelId" element={<Channel spinner={spinner} setSpinner={setSpinner} />} />
       </Routes>
-    </div>
+    </>
   )
 }
 

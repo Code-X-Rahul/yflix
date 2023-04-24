@@ -26,8 +26,18 @@ const Channel = ({ setSpinner, spinner }) => {
             const json = await response.json();
             setSpinner(false)
             setChannelInfo(json)
+            console.log(json)
+
+        }
+        async function fetchChannelVideoInfo() {
+            const response = await fetch(`${apiUrl}/channel/videos?id=${channelId}`, options)
+            const json = await response.json();
+            setSpinner(false)
+            // setChannelInfo(json)
+            console.log(json)
         }
         fetchChannelInfo();
+        fetchChannelVideoInfo()
     }, [channelId])
     const metaData = channelInfo?.meta
     const allTabs = metaData?.tabs
@@ -46,8 +56,6 @@ const Channel = ({ setSpinner, spinner }) => {
                 />
             })
         })
-
-
     return (
         <>
             {spinner && <div className="loading flex">
@@ -64,12 +72,11 @@ const Channel = ({ setSpinner, spinner }) => {
                                 <img src={metaData?.avatar[2]?.url} alt="" />
                             </div>
                         </div>
-                        <div className="detail-box">
+                        <div className="detail-box flex">
                             <h1>{metaData?.title}</h1>
                             <div className="all-counts flex">
                                 <p>{metaData?.channelHandle}</p>
-                                <p>{metaData?.subscriberCount} subscribers</p>
-                                <p>{metaData?.videosCount}</p>
+                                <p>{metaData?.subscriberCountText} subscribers</p>
                             </div>
                             <div className="ch-des">
                                 <p className='desc-text'>{metaData?.description}</p>
@@ -81,9 +88,10 @@ const Channel = ({ setSpinner, spinner }) => {
                     </div>
                 </div>}
                 {!spinner && <div className="channel-nav flex">
-                    <ul className='tabs'>
+                    {/* <ul className='tabs'>
                         {tabLoop}
-                    </ul>
+                    </ul> */}
+                    <h3>Videos</h3>
                 </div>}
                 <div className="flex">
                     <div className="video-grid videos-listing ">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import ChannelPic from '../assets/person-circle-outline.svg'
 
 const CardBs = ({ dataObject, setSpinner }) => {
     const [videoId, setVideoId] = useState()
@@ -37,7 +38,6 @@ const CardBs = ({ dataObject, setSpinner }) => {
     let image = "";
     let videoTitle = "";
     let channelName = "";
-    let cpf = "";
     if (dataObject.type === "video") {
         if (dataObject?.thumbnail !== undefined) {
             if (dataObject?.thumbnail[2] !== undefined) {
@@ -50,11 +50,6 @@ const CardBs = ({ dataObject, setSpinner }) => {
         } else {
             image = ""
         }
-        if (dataObject.channelThumbnail !== undefined) {
-            cpf = dataObject?.channelThumbnail[0]?.url
-        } else {
-            cpf = ChannelPic;
-        }
         videoTitle = dataObject?.title
         channelName = dataObject?.channelTitle
     } else {
@@ -62,12 +57,14 @@ const CardBs = ({ dataObject, setSpinner }) => {
     }
     return (
         <div className="card">
-            <img src={image} className="card-img-top" alt="..." />
-            <div className="card-body">
-                <h5 className="card-title video-title">{videoTitle}</h5>
-                <p className="card-text channel-name">{channelName}</p>
-                <p className="card-text video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
-            </div>
+            {/* <a style={{textDecoration:'none',color:"inherit"}} href='#player'> */}
+                <img onClick={videoIdHandler} src={image} className="card-img-top" alt="..." />
+                <div className="card-body">
+                    <h5 onClick={videoIdHandler} className="card-title">{videoTitle}</h5>
+                    <p onClick={channelIdHandler} className="card-text channel-name">{channelName}</p>
+                    <p className="card-text video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
+                </div>
+            {/* </a> */}
         </div>
     )
 }

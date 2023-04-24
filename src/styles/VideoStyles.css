@@ -44,6 +44,8 @@
   width: 100%;
   line-height: 20px;
   margin-bottom: 0;
+}
+.wrap-word{
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -54,4 +56,12 @@
 .channel-name,
 .video-stats {
   cursor: pointer;
+}
+.video-card{
+  background-color: azure;
+  transition: all 200ms ease;
+  border-radius: 10px;
+}
+.video-card:hover{
+  box-shadow: 5px 5px 15px rgba(211, 211, 240, 0.61);
 }
