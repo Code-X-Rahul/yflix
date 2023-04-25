@@ -4,7 +4,6 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import axios from 'axios';
 import loader from '../assets/Rolling-0.4s-207px.svg'
 import { useParams } from 'react-router-dom';
-import loading from '../assets/loading.webp'
 
 const SearchPage = ({ setSpinner, spinner, token, setToken }) => {
   const [videoList, setVideoList] = useState([])
@@ -72,10 +71,7 @@ const SearchPage = ({ setSpinner, spinner, token, setToken }) => {
 
   return (
     <div>
-      {/* {spinner && <div className="loading flex">
-        <img src={loading} alt="" />
-      </div>} */}
-      {spinner && <div className='flex loading-spinner'><img src={loader} alt="Loading..." /></div>}
+      {spinner && <div className='flex loading-spinner full'><img src={loader} alt="Loading..." /></div>}
       {!spinner && <InfiniteScroll
         dataLength={list.length}
         next={fetchMoreData}

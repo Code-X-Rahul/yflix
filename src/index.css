@@ -15,8 +15,10 @@
   --primary-font-clr: rgb(29, 29, 29);
   --secondary-clr: #606060;
   --secondary-font-clr: #292828;
+  --secondary-bg: #e0e0d9;
   --focus-clr: lightblue;
   --video-card-hover: rgba(211, 211, 240, 0.61);
+  --header-bg: #fdfbfb;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -27,7 +29,6 @@
     --secondary-bg: rgb(39, 38, 38);
     --secondary-clr: rgb(175, 173, 173);
     --secondary-font-clr: rgb(163, 160, 160);
-    --video-card-hover: rgba(211, 211, 240, 0.61);
   }
 }
 
@@ -41,6 +42,7 @@
 
 body {
   min-width: 320px;
+  min-height: 100vh;
   padding-top: 60px;
   background-color: var(--background-rgb);
   transition: all 250ms ease;
@@ -64,32 +66,4 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-bg);
-}
-.close {
-  cursor: pointer;
-  position: absolute;
-  right: 1.2rem;
-  top: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-.close:hover .line {
-  background-color: var(--secondary-clr);
-}
-.line {
-  border-radius: 1px;
-  width: 1.2rem;
-  margin: 2px;
-  height: 2px;
-  background-color: var(--primary-font-clr);
-}
-.line1 {
-  transform-origin: left;
-  transform: translateY(-7px) rotate(45deg);
-}
-.line2 {
-  transform-origin: left;
-  transform: rotate(-45deg);
 }

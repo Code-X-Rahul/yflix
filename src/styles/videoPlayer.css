@@ -69,7 +69,13 @@
 }
 .comment-div {
   display: none;
+  position: relative;
   background-color: var(--background-rgb);
+}
+.open{
+  position: absolute;
+  right: 1.2rem;
+  top: 0.4rem;
 }
 .card {
   box-sizing: border-box;
@@ -155,14 +161,7 @@
   width: 40px;
   border-radius: 50%;
 }
-.loading-spinner {
-  width: 100%;
-  height: 5rem;
-}
-.loading-spinner img {
-  width: 100%;
-  height: 100%;
-}
+
 .comment-div {
   background-color: var(--background-rgb);
   border-radius: 10px;

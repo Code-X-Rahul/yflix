@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import loading from '../assets/loading.webp'
 import { Card } from '../components'
-import InfiniteScroll from "react-infinite-scroll-component";
+import loader from '../assets/Rolling-0.4s-207px.svg'
+
 
 
 const Feed = ({ setSpinner, spinner }) => {
@@ -44,9 +44,7 @@ const Feed = ({ setSpinner, spinner }) => {
 
     return (
         <>
-            {spinner && <div className="loading flex">
-                <img src={loading} alt="" />
-            </div>}
+            {spinner && <div className='flex loading-spinner full'><img src={loader} alt="Loading..." /></div>}
             <div className="video-grid">
                 {!spinner && cardLoop}
             </div>

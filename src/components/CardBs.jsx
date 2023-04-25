@@ -60,7 +60,7 @@ const CardBs = ({ dataObject, setSpinner }) => {
             {/* <a style={{textDecoration:'none',color:"inherit"}} href='#player'> */}
                 <img onClick={videoIdHandler} src={image} className="card-img-top" alt="..." />
                 <div className="card-body">
-                    <h5 onClick={videoIdHandler} className="card-title">{videoTitle}</h5>
+                    <h5 onClick={videoIdHandler} className="card-title wrap-word">{videoTitle}</h5>
                     <p onClick={channelIdHandler} className="card-text channel-name">{channelName}</p>
                     <p className="card-text video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
                 </div>

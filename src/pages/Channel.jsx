@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import '../styles/channelstyles.css'
-import loading from '../assets/loading.webp'
 import { Card } from '../components'
+import loader from '../assets/Rolling-0.4s-207px.svg'
+
 
 const Channel = ({ setSpinner, spinner }) => {
     const { channelId } = useParams()
@@ -51,9 +52,8 @@ const Channel = ({ setSpinner, spinner }) => {
         })
     return (
         <>
-            {spinner && <div className="loading flex">
-                <img src={loading} alt="" />
-            </div>}
+            {spinner && <div className='flex loading-spinner full'><img src={loader} alt="Loading..." /></div>}
+
             <div className='channel-container'>
                 {metaData?.banner && <div className="banner flex">
                     <img src={metaData?.banner[0].url} alt="" />

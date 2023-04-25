@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import '../styles/HeaderStyles.css'
-import { searchIcon } from '../icons';
+import searchIcon from '../icons/search.svg';
 import Logo from '../assets/logo.webp'
 import { Link, useNavigate } from 'react-router-dom';
 

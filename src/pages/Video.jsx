@@ -15,7 +15,6 @@ const Video = ({ setSpinner, spinner, token, setToken }) => {
   const [showDescription, setShowDescription] = useState(false)
   const [showComments, setShowComments] = useState(false)
   const [comments, setComments] = useState([])
-  const [commentToken, setCommentToken] = useState()
   const navigate = useNavigate();
 
   const description = videoInfo?.description;
@@ -39,25 +38,22 @@ const Video = ({ setSpinner, spinner, token, setToken }) => {
       const response = await fetch(`${apiUrl}/video/info?id=${videoId}`, options)
       const json = await response.json();
       setVideoInfo(json)
-      setSpinner(false)
     }
     async function fetchSuggestedVideo() {
       const response = await fetch(`${apiUrl}/related?id=${videoId}`, options)
       const json = await response.json();
       setToken(json?.continuation)
       setSuggestedVideo([...json?.data])
-      setSpinner(false)
     }
     async function fetchComments() {
       const response = await fetch(`${apiUrl}/comments?id=${videoId}`, options)
       const json = await response.json();
-      setCommentToken(json?.continuation)
       setComments([...json?.data])
-      setSpinner(false)
     }
     fetchVideoInfo();
     fetchSuggestedVideo();
     fetchComments();
+    setSpinner(false);
   }, [videoId])
 
   const list = suggestedVideo
@@ -107,68 +103,73 @@ const Video = ({ setSpinner, spinner, token, setToken }) => {
     })
 
   return (
-    <div className='wrapper'>
-      <div className='main_video' id='player'>
-        {!spinner && <div className='player'>
-          <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`}
-            width='100%'
-            height='100%'
-            muted
-            controls
-            origin='https://www.youtube.com'
-          />
-        </div>}
-        {!spinner && <div className="about-video">
-          <p>{videoInfo?.title}</p>
-          <span onClick={() => navigate(`/channel/${videoInfo?.channelId}`)} className='channelName'>{videoInfo?.channelTitle}</span>
-        </div>}
-        <div className="video-desc">
-          {videoInfo && <span>{Number(videoInfo?.viewCount).toLocaleString()} views</span>}
-          {videoInfo && <span>{videoInfo?.publishDate}</span>}
-          <p className={showDescription ? 'style' : 'para'}>{
-            description?.split('\n').map(function (item, idx) {
-              return (
-                <span key={idx}>
-                  {item}
-                  <br />
-                </span>
-              )
-            })
-          }</p>
-
-          <button className={!showDescription ? "showHideStyle more-btn" : 'more-btn'} onClick={showDescriptionHandler}>Show{showDescription ? " less" : " more"}</button>
-        </div>
-        <div className={showComments ? 'showMobileComments' : "comment-wrapper"}>
-          {comments !== undefined && comments.length !== 1 && <p className='comment-count'>{comments?.commentsCount} Comments</p>}
-          {comments !== undefined && comments.length !== 0 && comments.map(el => {
-            return el && <CommentBox
-              data={el}
-              key={el?.commentId}
+    <>
+      {spinner && <div className='flex loading-spinner full'><img src={loader} alt="Loading..." /></div>}
+      {!spinner && <div className='wrapper'>
+        <div className='main_video' id='player'>
+          <div className='player'>
+            <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`}
+              width='100%'
+              height='100%'
+              muted
+              controls
+              origin='https://www.youtube.com'
             />
-          })}
-          <div onClick={(e) => setShowComments(prev => !prev)} className='close'>
-            <div className="line line1"></div>
-            <div className="line line2"></div>
           </div>
+          <div className="about-video">
+            <p>{videoInfo?.title}</p>
+            <span onClick={() => navigate(`/channel/${videoInfo?.channelId}`)} className='channelName'>{videoInfo?.channelTitle}</span>
+          </div>
+          <div className="video-desc">
+            {videoInfo && <span>{Number(videoInfo?.viewCount).toLocaleString()} views</span>}
+            {videoInfo && <span>{videoInfo?.publishDate}</span>}
+            <p className={showDescription ? 'style' : 'para'}>{
+              description?.split('\n').map(function (item, idx) {
+                return (
+                  <span key={idx}>
+                    {item}
+                    <br />
+                  </span>
+                )
+              })
+            }</p>
+            <button className={!showDescription ? "showHideStyle more-btn" : 'more-btn'} onClick={showDescriptionHandler}>Show{showDescription ? " less" : " more"}</button>
+          </div>
+          <div className={showComments ? 'showMobileComments' : "comment-wrapper"}>
+            {comments !== undefined && comments.length !== 1 && <p className='comment-count'>{comments?.commentsCount} Comments</p>}
+            {comments !== undefined && comments.length !== 0 && comments.map(el => {
+              return el && <CommentBox
+                data={el}
+                key={el?.commentId}
+              />
+            })}
+            <div div onClick={(e) => setShowComments(prev => !prev)} className='close'>
+              <div className="line line1"></div>
+              <div className="line line2"></div>
+            </div>
+          </div>
+          {!showComments && <div onClick={(e) => setShowComments(prev => !prev)} className='comment-div'>
+            <p className='comment-count'>Comments</p>
+            {comments.length !== 0 && <CommentBox data={comments[0]} />}
+            <div className='open'>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </div>
+          </div>}
         </div>
-        {!showComments && <div onClick={(e) => setShowComments(prev => !prev)} className='comment-div'>
-          <p className='comment-count'>Comments</p>
-          {comments.length !== 0 && <CommentBox data={comments[0]} />}
-        </div>}
-      </div>
-      <div className="wrapper-absolute">
-        <InfiniteScroll
-          dataLength={list.length}
-          next={fetchMoreData}
-          hasMore={token !== ''}
-          loader={<div className='flex loading-spinner'><img src={loader} alt="Loading..." /></div>}
-        >
-          <div className="grid-only">
-            {cardLoop}
-          </div>
-        </InfiniteScroll>
-      </div>
-    </div>
+        <div className="wrapper-absolute">
+          <InfiniteScroll
+            dataLength={list.length}
+            next={fetchMoreData}
+            hasMore={token !== ''}
+            loader={<div className='flex loading-spinner'><img src={loader} alt="Loading..." /></div>}
+          >
+            <div className="grid-only">
+              {cardLoop}
+            </div>
+          </InfiniteScroll>
+        </div>
+      </div >}
+    </>
   )
 }
 
