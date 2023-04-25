@@ -18,7 +18,6 @@ function Header({ setSearch }) {
         if (searchInputRef.current.value === "") {
             return
         } else {
-            // setSearch(searchInputRef.current.value);
             navigate(`/search/${searchInputRef.current.value}`)
         }
     }
@@ -27,7 +26,8 @@ function Header({ setSearch }) {
         if (searchInputRef2.current.value === "") {
             return
         } else {
-            setSearch(searchInputRef2.current.value);
+            navigate(`/search/${searchInputRef2.current.value}`)
+            
         }
     }
 

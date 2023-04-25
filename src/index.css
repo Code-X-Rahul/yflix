@@ -22,7 +22,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --header-bg: #1f1f1f;
+    --header-bg: #0a0a0a;
     --background-rgb: rgb(15, 15, 15);
     --primary-clr: rgba(255, 255, 255, 0.88);
     --primary-font-clr: rgb(241, 241, 241);

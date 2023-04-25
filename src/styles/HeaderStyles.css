@@ -113,7 +113,7 @@
 .mobile-search-bar-div {
   position: absolute;
   inset: 0;
-  background-color: var(--background-rgb);
+  background-color: var(--header-bg);
   display: flex;
   align-items: center;
   justify-content: center;
