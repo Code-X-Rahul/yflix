@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   border-bottom: 1px solid var(--secondary-clr);
-  background-color: white;
+  background-color: var(--header-bg);
   z-index: 100;
   position: fixed;
   top: 0;
@@ -15,6 +15,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
   position: relative;
 }
 
@@ -28,17 +29,26 @@
   align-items: center;
   justify-content: center;
 }
-
-.hamburger-menu,
-.youtube-logo {
-  height: 1.5rem;
+.left-section{
   margin-inline: 1.5rem;
+}
+
+.youtube-logo {
+  margin-inline: 0.2rem;
+  height: 1.5rem;
   cursor: pointer;
+}
+.logo_text{
+  font-size: 1.2rem;
+  font-family: 'Cinzel Decorative', cursive;
+  font-style: italic;
+  color: var(--primary-clr);
+  text-decoration: none;
 }
 
 .middle-section {
   flex: 1;
-  max-width: 45vw;
+  max-width: 25%;
   min-width: 200px;
 }
 
@@ -51,13 +61,16 @@
   border: 1px solid var(--primary-clr);
   border-top-left-radius: 2rem;
   border-bottom-left-radius: 2rem;
+  background-color: var(--background-rgb);
+  color: var(--primary-clr);
 }
 
 .search-button {
   border: 1px solid var(--primary-clr);
   border-bottom-right-radius: 2rem;
   border-top-right-radius: 2rem;
-  background-color: #f7f7f7;
+  background-color: var(--secondary-clr);
+  background-color: #e5e1e1;
   cursor: pointer;
   margin-right: 0.5rem;
   justify-content: center;
@@ -70,15 +83,9 @@
   width: 40%;
 }
 
-.voice-search-icon {
-  width: 2.3rem;
-  object-fit: contain;
-  padding: 0.5rem;
-  background-color: #f8f8f8;
-  border-radius: 20px;
-}
 
 .search-button-mobile_only {
+  margin: 0 1rem;
   width: 2.1rem;
   height: 2.1rem;
   background: none;
@@ -90,89 +97,12 @@
 .search-button-mobile_only img {
   width: 100%;
   padding: 0 5px;
+  filter: invert(1);
 }
 
 .right-section {
-  flex-shrink: 0;
-}
-
-.upload-icon,
-.youtube-apps-icon,
-.notification-icon,
-.search-button-mobile_only {
-  height: 1.6rem;
-  margin-inline: 0.8rem;
-  cursor: pointer;
-}
-
-.my-channel-icon {
-  height: 2.2rem;
-  margin: 0px 20px 0px 15px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.sidebar {
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 4.5rem;
-  position: fixed;
-  top: 3.55rem;
-  left: 0px;
-  bottom: 0px;
-  background-color: white;
-  z-index: 200;
-  transition: transform 250ms ease;
-}
-
-.sidebar-link {
-  font-size: 0.65rem;
-  height: 4.8rem;
-  flex-direction: column;
-  cursor: pointer;
-}
-
-.sidebar-link img {
-  height: 1.5rem;
-  margin-bottom: 5px;
-}
-
-.body {
-  padding-left: 80px;
-  transition: all 200ms ease;
-}
-
-/*For TOOL TIP*/
-.imgs {
-  position: relative;
-}
-.tooltip {
-  position: absolute;
-  top: 160%;
-  left: -50%;
-  background-color: rgb(85, 85, 85);
-  color: white;
-  padding: 0.7rem 1rem;
-  border-radius: 0.4rem;
   display: none;
-  font-size: 0.8rem;
-}
-.imgs:hover .tooltip {
-  display: block;
-}
-.notifications::before {
-  position: absolute;
-  content: "1";
-  top: 0;
-  right: 20%;
-  background-color: red;
-  border-radius: 50%;
-  width: 0.9rem;
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: white;
-  text-align: center;
-  aspect-ratio: 1;
+  flex-shrink: 0;
 }
 
 /* for responsive search box*/
@@ -183,23 +113,31 @@
 .mobile-search-bar-div {
   position: absolute;
   inset: 0;
-  background-color: white;
+  background-color: var(--background-rgb);
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 100%;
 }
 .back {
+  display: flex;
+  align-items: center;
   border: none;
   border-radius: 50%;
   background: none;
   margin-inline: 0.5rem;
 }
 .back ion-icon {
-  font-size: 2.5rem;
+  color: var(--primary-clr);
+  font-size: 1.5rem;
 }
 .search-bar-mobile {
-  width: 55vw;
+  width: 80%;
   height: 100%;
+  color: var(--primary-clr);
   border: 1px solid var(--primary-clr);
+  background-color: var(--background-rgb);
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   padding-inline: 20px;
@@ -207,7 +145,7 @@
   margin-right: 0rem;
 }
 .search-bar-mobile:focus {
-  outline: 1px solid blue;
+  outline: 1px solid  var(--focus-clr);
   z-index: 2;
 }
 .mobile-btn {
@@ -217,5 +155,5 @@
 }
 .mobile_only {
   margin-inline: 0.5rem;
-  background-color: #f7f7f7;
+  background-color: var(--mobile-search-bg);
 }

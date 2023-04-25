@@ -64,11 +64,11 @@ const Card = ({ dataObject, setSpinner }) => {
     return (
         <div className="video-card">
             <div className="video-thumbnails">
-                <a onClick={videoIdHandler}><img src={image} alt="Video Thumbnail" /></a>
+                <img onClick={videoIdHandler} src={image} alt="Video Thumbnail" />
             </div>
             <div className={dataObject.channelThumbnail ? "video-info-grid" : 'styleForChannel'}>
                 {dataObject.channelThumbnail && <div className="cpf">
-                    <p onClick={channelIdHandler}><img src={dataObject.channelThumbnail? cpf : ChannelPic} alt="Channel Thumbnail" /></p>
+                    <p onClick={channelIdHandler}><img src={dataObject.channelThumbnail ? cpf : ChannelPic} alt="" /></p>
                 </div>}
                 <div className="video-info">
                     <p className="video-title">

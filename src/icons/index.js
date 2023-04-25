@@ -1,14 +1,2 @@
-export { default as hamburger } from './hamburger-menu.svg';
-export { default as notificationsIcon } from './notifications.svg';
-export { default as youtubeLogo } from './youtube-logo.svg';
-export { default as searchIcon } from './search.svg';
-export { default as voiceSearchIcon } from './voice-search-icon.svg';
-export { default as uploadIcon } from './upload.svg';
-export { default as myChannelIcon } from './my-channel.jpg';
-export { default as youtubeAppsIcon } from './youtube-apps.svg';
-export { default as homeIcon } from './home.svg';
-export { default as exploreIcon } from './explore.svg';
-export { default as subscriptionIcon } from './subscriptions.svg';
-export { default as originalsIcon } from './originals.svg';
-export { default as libraryIcon } from './library.svg';
-export { default as youtubeMusicIcon } from './youtube-music.svg';
+export { default as youtubeLogo } from "./youtube-logo.svg";
+export { default as searchIcon } from "./search.svg";

@@ -9,17 +9,3 @@
     inset: 0;
     background-color: black;
 }
-.overlay-cat{
-    /* background-color: #ccc; */
-    overflow: hidden;
-    display: flex;
-    justify-content: space-around;
-}
-.overlay-cat > button{
-    border: 1px solid silver;
-    border-radius: 20px;
-    background: rgba(241, 241, 241 , 0.7);
-    font-size: 1.2rem;
-    padding: 0.2em 0.4em;
-    /* margin: 0 0.7rem; */
-}

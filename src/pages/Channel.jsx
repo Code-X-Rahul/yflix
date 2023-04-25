@@ -22,26 +22,19 @@ const Channel = ({ setSpinner, spinner }) => {
     useEffect(() => {
         setSpinner(true)
         async function fetchChannelInfo() {
-            const response = await fetch(`${apiUrl}/channel/home?id=${channelId}`, options)
-            const json = await response.json();
-            setSpinner(false)
-            setChannelInfo(json)
-            console.log(json)
-
-        }
-        async function fetchChannelVideoInfo() {
-            const response = await fetch(`${apiUrl}/channel/videos?id=${channelId}`, options)
-            const json = await response.json();
-            setSpinner(false)
-            // setChannelInfo(json)
-            console.log(json)
+            try {
+                const response = await fetch(`${apiUrl}/channel/home?id=${channelId}`, options)
+                const json = await response.json();
+                setSpinner(false)
+                setChannelInfo(json)
+            } catch (error) {
+                alert(error);
+            }
         }
         fetchChannelInfo();
-        fetchChannelVideoInfo()
     }, [channelId])
     const metaData = channelInfo?.meta
-    const allTabs = metaData?.tabs
-    const tabLoop = allTabs?.map(tab => tab !== "Search" && <li key={tab}><Link to={`/channel/${tab}`}>{tab}</Link></li>)
+
 
     const list = channelInfo?.data;
     const cardLoop =
@@ -65,7 +58,7 @@ const Channel = ({ setSpinner, spinner }) => {
                 {metaData?.banner && <div className="banner flex">
                     <img src={metaData?.banner[0].url} alt="" />
                 </div>}
-                {metaData && !spinner && <div className="channel-details flex">
+                {metaData && !spinner && <div className={metaData?.banner ? "channel-details flex" : "channel-details-woBanner flex"}>
                     <div className="channel-sub-details">
                         <div className="details-left">
                             <div className="channel-image">
@@ -88,13 +81,10 @@ const Channel = ({ setSpinner, spinner }) => {
                     </div>
                 </div>}
                 {!spinner && <div className="channel-nav flex">
-                    {/* <ul className='tabs'>
-                        {tabLoop}
-                    </ul> */}
                     <h3>Videos</h3>
                 </div>}
                 <div className="flex">
-                    <div className="video-grid videos-listing ">
+                    <div className="video-grid videos-listing">
                         {!spinner && cardLoop}
                     </div>
                 </div>

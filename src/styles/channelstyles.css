@@ -6,6 +6,11 @@
   object-fit: cover;
 }
 .channel-details {
+  margin-top: -100px;
+  padding-block: 1rem;
+}
+.channel-details-woBanner {
+  margin-top: 0;
   padding-block: 1rem;
 }
 .channel-sub-details,
@@ -16,6 +21,7 @@
   width: 70%;
 }
 .channel-image > img {
+  border: 2px solid blue;
   width: 10rem;
   border-radius: 50%;
 }
@@ -25,19 +31,19 @@ img {
 .detail-box {
   flex-direction: column;
   margin-block: 1rem;
+  color: var(--primary-font-clr);
 }
 .detail-box > h1 {
   font-size: 2rem;
 }
 .all-counts {
+  color: var(--secondary-font-clr);
   justify-content: flex-start;
 }
 .all-counts > p {
-  color: #292828;
   padding-inline: 0.2rem;
 }
 .ch-des {
-  color: #292828;
   margin-block: 1rem;
   display: flex;
 }
@@ -51,20 +57,39 @@ img {
   -webkit-box-orient: vertical;
   margin-inline-end: 1rem;
 }
-.tabs{
-  padding-inline: 2rem;
-}
-.tabs > li{
-  cursor: pointer;
-  list-style: none;
-  padding: 1.2rem;
-  font-size: 1.1rem;
-  position: relative;
-}
-.tabs > li > a{
-  text-decoration: none;
-  color: black;
+.channel-nav{
+  color: var(--primary-font-clr);
 }
 .videos-listing{
   width: 70%;
+}
+@media screen and (max-width: 768px) {
+  .channel-details {
+    margin-top: 0;
+  }
+  .channel-sub-details,
+  .tabs {
+    width: 100%;
+  }
+  .channel-image > img {
+    width: 8rem;
+  }
+  .detail-box > h1 {
+    font-size: 1.5rem;
+  }
+  .all-counts > p {
+    font-size: 0.8rem;
+  }
+  .ch-des {
+    margin-block: 0.5rem;
+  }
+  .desc-text {
+    width: 30ch;
+  }
+
+}
+@media screen and (max-width: 1000px){
+  .videos-listing{
+    width: 100%;
+  }
 }
