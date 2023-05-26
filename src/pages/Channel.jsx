@@ -31,6 +31,7 @@ const Channel = ({ setSpinner, spinner }) => {
                 setChannelInfo(json)
             } catch (error) {
                 alert(error);
+                setSpinner(false)
             }
         }
         fetchChannelInfo();
