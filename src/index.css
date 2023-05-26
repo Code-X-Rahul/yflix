@@ -30,6 +30,9 @@
     --secondary-clr: rgb(175, 173, 173);
     --secondary-font-clr: rgb(163, 160, 160);
   }
+  .search-button-mobile_only img {
+    filter: invert(1);
+  }
 }
 
 *,
@@ -66,4 +69,8 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: var(--secondary-bg);
+}
+a{
+  text-decoration: none;
+  
 }

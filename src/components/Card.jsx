@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom';
 import ChannelPic from '../assets/person-circle-outline.svg'
 
-const Card = ({ dataObject, setSpinner }) => {
-    const [videoId, setVideoId] = useState()
-    const [channelId, setChannelId] = useState()
-    const navigate = useNavigate();
-
+const Card = ({ dataObject }) => {
 
     let image = "";
     let videoTitle = "";
@@ -34,47 +30,25 @@ const Card = ({ dataObject, setSpinner }) => {
     } else {
         return
     }
-    useEffect(() => {
-        if (videoId === undefined) {
-            return
-        } else {
-            setSpinner(true)
-            navigate(`/watch/${videoId}`)
-            setSpinner(false)
-        }
-    }, [videoId])
-    useEffect(() => {
-        if (channelId === undefined) {
-            return
-        } else {
-            setSpinner(true)
-            navigate(`/channel/${channelId}`)
-            setSpinner(false)
-        }
-    }, [channelId])
 
 
-    const videoIdHandler = () => {
-        setVideoId(dataObject?.videoId)
-
-    }
-    const channelIdHandler = () => {
-        setChannelId(dataObject?.channelId)
-    }
     return (
         <div className="video-card">
             <div className="video-thumbnails">
-                <img onClick={videoIdHandler} src={image} alt="Video Thumbnail" />
+                <Link to={`/watch/${dataObject?.videoId}`}>
+                    <img src={image} alt="Video Thumbnail" />
+                </Link>
+                <p className='video-length'>{dataObject?.lengthText}</p>
             </div>
             <div className={dataObject.channelThumbnail ? "video-info-grid" : 'styleForChannel'}>
                 {dataObject.channelThumbnail && <div className="cpf">
-                    <p onClick={channelIdHandler}><img src={dataObject.channelThumbnail ? cpf : ChannelPic} alt="" /></p>
+                    <Link to={`/channel/${dataObject?.channelId}`}><img src={dataObject.channelThumbnail ? cpf : ChannelPic} alt="" /></Link>
                 </div>}
                 <div className="video-info">
                     <p className="video-title">
-                        <a className='wrap-word' onClick={videoIdHandler}>{videoTitle}</a>
+                        <Link to={`/watch/${dataObject?.videoId}`} className='wrap-word'>{videoTitle}</Link>
                     </p>
-                    <p onClick={channelIdHandler} className="channel-name">{channelName}</p>
+                    <Link to={`/channel/${dataObject?.channelId}`} className="channel-name">{channelName}</Link>
                     <p className="video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
                 </div>
             </div>

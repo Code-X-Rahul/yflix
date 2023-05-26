@@ -5,6 +5,19 @@
   row-gap: 1rem;
   padding: 1.3rem;
 }
+.video-thumbnails{
+  position: relative;
+  display: flex;
+}
+.video-length{
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  color: var(--background-rgb);
+  background-color: var(--primary-clr);
+  border-radius: 0.2rem;
+  padding: 0rem 0.2rem;
+}
 .video-thumbnails > a{
   width: 100%;
 }

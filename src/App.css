@@ -47,3 +47,7 @@
 .full{
     margin: auto;
 }
+
+img{
+  pointer-events: none;
+}

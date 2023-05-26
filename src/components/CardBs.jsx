@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ChannelPic from '../assets/person-circle-outline.svg'
 
 const CardBs = ({ dataObject, setSpinner }) => {
@@ -57,14 +57,18 @@ const CardBs = ({ dataObject, setSpinner }) => {
     }
     return (
         <div className="card">
-            {/* <a style={{textDecoration:'none',color:"inherit"}} href='#player'> */}
-                <img onClick={videoIdHandler} src={image} className="card-img-top" alt="..." />
-                <div className="card-body">
-                    <h5 onClick={videoIdHandler} className="card-title wrap-word">{videoTitle}</h5>
-                    <p onClick={channelIdHandler} className="card-text channel-name">{channelName}</p>
-                    <p className="card-text video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
-                </div>
-            {/* </a> */}
+            <Link to={`/watch/${dataObject?.videoId}`} className="card-img-top">
+                <img src={image} className="card-img-top" alt="..." />
+            </Link>
+            <div className="card-body">
+                {/* <Link to={`/watch/${dataObject?.videoId}`} className="card-title wrap-word"> */}
+                    <h5 onClick={videoIdHandler} className="card-title wrap-word">
+                        {videoTitle}
+                    </h5>
+                {/* </Link> */}
+                <p onClick={channelIdHandler} className="card-text channel-name">{channelName}</p>
+                <p className="card-text video-stats">{Number(dataObject?.viewCount).toLocaleString()} views ·{dataObject?.publishedTimeText}</p>
+            </div>
         </div>
     )
 }
