@@ -111,7 +111,7 @@ const Video = ({ setSpinner, spinner, token, setToken }) => {
             <ReactPlayer url={`https://www.youtube.com/watch?v=${videoId}`}
               width='100%'
               height='100%'
-              muted
+              autoPlay
               controls
               origin='https://www.youtube.com'
             />

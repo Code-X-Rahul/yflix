@@ -1,36 +1,13 @@
-import React, { useEffect, useState } from 'react'
 import { Card } from '../components'
 import loader from '../assets/Rolling-0.4s-207px.svg'
+import { useQuery } from 'react-query'
+import { fetchData } from '../rapidApi'
 
 
 
 const Feed = ({ setSpinner, spinner }) => {
-    const [trendList, setTrendList] = useState()
-
-    // API
-    const apiUrl = import.meta.env.VITE_APP_API_URL
-    const apiKey = import.meta.env.VITE_APP_API_KEY
-    const apiHost = import.meta.env.VITE_APP_API_HOST
-
-    useEffect(() => {
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': apiKey,
-                'X-RapidAPI-Host': apiHost
-            }
-        };
-        setSpinner(true)
-        async function fetchData() {
-            const response = await fetch(`${apiUrl}/trending?geo=IN`, options);
-            const json = await response.json();
-            setTrendList(json?.data);
-            setSpinner(false)
-        }
-        fetchData()
-    }, [])
-
-    const list = trendList;
+    const { data, isError, isLoading, isSuccess } = useQuery('trending', fetchData)
+    const list = data;
     const cardLoop =
         list?.map(el => {
             return el && <Card
@@ -42,14 +19,16 @@ const Feed = ({ setSpinner, spinner }) => {
             />
         })
 
-    return (
-        <>
-            {spinner && <div className='flex loading-spinner full'><img src={loader} alt="Loading..." /></div>}
-            <div className="video-grid">
-                {!spinner && cardLoop}
-            </div>
-        </>
-    )
+    if (isLoading) return <div className='flex loading-spinner full' > <img src={loader} alt="Loading..." /></div >
+    if (isError) return <h1>Error</h1>
+    if (isSuccess)
+        return (
+            <>
+                <div className="video-grid">
+                    {cardLoop}
+                </div>
+            </>
+        )
 }
 
 export default Feed;
